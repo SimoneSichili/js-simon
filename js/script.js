@@ -24,7 +24,8 @@ $(document).ready(function () {
     console.log("Lista di 5 numeri casuali compresi tra 1 e 100:", randomList);
 
     //Mostro la lista dei numeri da ricordare
-    alert(randomList);
+    alert(randomList.join("-"));
+    $("#random-number").text(randomList.join("-"));
 
     //#2 Fare 5 prompt ed inserire i numeri all'interno di un altro array (confrontandoli con quelli del primo array)
     var userList = [];
@@ -58,8 +59,28 @@ $(document).ready(function () {
             }
 
             //#3 Il software dice quanti e quali numeri sono stati ricordati.
-            console.log("Hai ricordato " + userList.length + " numeri.");
-            console.log("I numeri che hai ricordato sono:", userList);
+            if (userList.length != 5) {
+                console.log("Hai ricordato " + userList.length + " numero/i.");
+                $("#score").text(userList.length);
+            } else {
+                console.log(userList.length, "Complimenti, hai ricordato tutti i numeri!");
+                $("#score").text(userList.length + ", complimenti, hai ricordato tutti i numeri!"); 
+            }
+            // console.log("Hai ricordato " + userList.length + " numero/i.");
+            // $("#score").text(userList.length);
+
+
+            if (userList.length == 0) {
+                console.log("Non hai indovinato nessun numero");
+                $("#number-list").text("Non hai indovinato nessun numero");
+            } else {
+                console.log("I numeri che hai ricordato sono:", userList.join("-"));
+                $("#number-list").text(userList.join("-"));
+            }
+
+            // console.log("I numeri che hai ricordato sono:", userList);
+            // $("#number-list").text(userList);
+
             
         },3000); //secondi per settare il countdown
 
