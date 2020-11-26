@@ -21,30 +21,47 @@ $(document).ready(function () {
     
     }
 
-    console.log("Lista dei 5 numeri casuali:", randomList);
+    console.log("Lista di 5 numeri casuali compresi tra 1 e 100:", randomList);
 
+    //Mostro la lista dei numeri da ricordare
     alert(randomList);
 
     //#2 Fare 5 prompt ed inserire i numeri all'interno di un altro array (confrontandoli con quelli del primo array)
     var userList = [];
 
-    for (var i = 0; i < 5; i++) {
+    setTimeout(
+        function(){
+
+            for (var i = 0; i < 5; i++) {
         
-        var number = parseInt(prompt("Inserisci i numeri che ricordi"));
+                // var number = parseInt(prompt("Inserisci i numeri che ricordi"));
+                do {
 
-        var comparedNumber = isIncluded(number, randomList);
+                    var number = parseInt(prompt("Inserisci un numero che ricordi tra 1 e 100")); 
+                    
+                    if (number <= 0) {
+                        alert("Non puoi inserire un numero minore di 1");
+                    } else if (number >= 101) {
+                        alert("Non puoi inserire un numero maggiore di 100");
+                    } else if (isNaN(number)) {
+                        alert("Non puoi inserire una parola");
+                    }
+            
+                } while (number <= 0 || number >= 101 || isNaN(number));
 
-        if (comparedNumber == true) {
-            userList.push(number);
-        } 
+                var comparedNumber = isIncluded(number, randomList);
+        
+                if (comparedNumber == true) {
+                    userList.push(number);
+                } 
+        
+            }
 
-    }
-    
-    console.log("Lista dei numeri cha hai indovinato", userList);
-
-    //#3 Il software dice quanti e quali numeri sono stati ricordati.
-    console.log("Hai ricordato " + userList.length + " numeri.");
-    console.log("I numeri che hai ricordato sono:", userList);
+            //#3 Il software dice quanti e quali numeri sono stati ricordati.
+            console.log("Hai ricordato " + userList.length + " numeri.");
+            console.log("I numeri che hai ricordato sono:", userList);
+            
+        },3000); //secondi per settare il countdown
 
 
     //END JS
@@ -72,3 +89,4 @@ function isIncluded(nmb, array) {
     return result;
 
 }
+
